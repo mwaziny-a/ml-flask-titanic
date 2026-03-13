@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titanic Survival Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Titanic Survival Prediction</h1>
+        <p class="subtitle">Enter passenger details to predict survival.</p>
+
+        <form action="{{ url_for('predict') }}" method="POST" class="prediction-form">
+            <div class="form-group">
+                <label for="pclass">Passenger Class</label>
+                <select name="pclass" id="pclass" required>
+                    <option value="1">1st Class</option>
+                    <option value="2">2nd Class</option>
+                    <option value="3">3rd Class</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="sex">Sex</label>
+                <select name="sex" id="sex" required>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" step="0.1" name="age" id="age" required>
+            </div>
+
+            <div class="form-group">
+                <label for="sibsp">Siblings / Spouses</label>
+                <input type="number" name="sibsp" id="sibsp" required>
+            </div>
+
+            <div class="form-group">
+                <label for="parch">Parents / Children</label>
+                <input type="number" name="parch" id="parch" required>
+            </div>
+
+            <div class="form-group">
+                <label for="fare">Fare</label>
+                <input type="number" step="0.01" name="fare" id="fare" required>
+            </div>
+
+            <div class="form-group">
+                <label for="embarked">Embarked</label>
+                <select name="embarked" id="embarked" required>
+                    <option value="C">Cherbourg</option>
+                    <option value="Q">Queenstown</option>
+                    <option value="S">Southampton</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result success">
+            <h2>Prediction</h2>
+            <p>{{ prediction_text }}</p>
+            {% if probability_text %}
+            <p><strong>Survival Probability:</strong> {{ probability_text }}</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if error_text %}
+        <div class="result error">
+            <h2>Error</h2>
+            <p>{{ error_text }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

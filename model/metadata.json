@@ -1,0 +1,33 @@
+{
+  "project_name": "Titanic Survival Prediction",
+  "task_type": "classification",
+  "dataset_file": "data/titanic.csv",
+  "target": "survived",
+  "features": [
+    "pclass",
+    "sex",
+    "age",
+    "sibsp",
+    "parch",
+    "fare",
+    "embarked"
+  ],
+  "numeric_features": [
+    "pclass",
+    "age",
+    "sibsp",
+    "parch",
+    "fare"
+  ],
+  "categorical_features": [
+    "sex",
+    "embarked"
+  ],
+  "model_type": "LogisticRegression",
+  "metrics": {
+    "accuracy": 0.8092,
+    "precision": 0.7717,
+    "recall": 0.71,
+    "f1_score": 0.7396
+  }
+}
