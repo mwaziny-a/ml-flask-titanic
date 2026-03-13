@@ -7,8 +7,10 @@ from flask import Flask, render_template, request
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MODEL_PATH = os.path.join(BASE_DIR, "model", "pipeline.joblib")
 METADATA_PATH = os.path.join(BASE_DIR, "model", "metadata.json")
+TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
+STATIC_DIR = os.path.join(BASE_DIR, "static")
 
-app = Flask(__name__, template_folder="../templates", static_folder="../static")
+app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 
 pipeline = joblib.load(MODEL_PATH)
 
@@ -65,7 +67,3 @@ def predict():
             error_text=str(e),
             metadata=metadata
         )
-
-
-if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5050, debug=False, use_reloader=False)
